@@ -1,0 +1,16 @@
+{
+  "title" : "Presentation",
+  "slides" : [
+    [
+      {
+        "type" : "title",
+        "data" : {
+          "title" : "Doing it right with(out) Elm",
+          "subtitle" : "Exploring Elm and its Architecture",
+          "author" : "Mats Stijlaart",
+          "date" : "2015-01-27"
+        }
+      }
+    ]
+  ]
+}

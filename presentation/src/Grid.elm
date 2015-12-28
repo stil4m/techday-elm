@@ -2,6 +2,7 @@ module Grid (Model, GridRow, Action, init, update, view) where
 
 import Box
 import Html exposing (table, tr, td)
+import Effects exposing (Effects)
 
 type alias Tile =
   { id : Int
@@ -12,11 +13,13 @@ type alias GridRow = List Tile
 type alias Model = List GridRow
 type Action = BoxAction Int Box.Action
 
-init : Int -> Int -> Model
+init : Int -> Int -> (Model, Effects Action)
 init width height =
-  List.map
-    (\h -> initRow (h*width) width)
-    [0..(height-1)]
+  ( List.map
+      (\h -> initRow (h*width) width)
+      [0..(height-1)]
+  , Effects.none
+  )
 
 initRow : Int -> Int -> GridRow
 initRow idOffset length =
@@ -49,13 +52,15 @@ updateTile id action tile =
     tile
 
 
-update : Action -> Model -> Model
+update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     BoxAction id act ->
-      List.map
-        (\row ->
-          List.map
-            (updateTile id act)
-            row)
-        model
+      ( List.map
+          ( \row ->
+            List.map
+              (updateTile id act)
+              row)
+          model
+      , Effects.none
+      )

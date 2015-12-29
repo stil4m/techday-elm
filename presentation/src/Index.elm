@@ -7,7 +7,7 @@ import Effects exposing (Effects)
 
 app : StartApp.App Model
 app = StartApp.start
-  { init = (init 5 5)
+  { init = (init 10 10 10)
   , view = view
   , update = update
   , inputs = []
@@ -23,9 +23,9 @@ type alias Model =
 
 type Action = Increment | Decrement | GridAction Grid.Action | FetchedData (Maybe String)
 
-init : Int -> Int -> (Model, Effects Action)
-init width height =
-  ( { grid = fst (Grid.init width height)
+init : Int -> Int -> Int -> (Model, Effects Action)
+init width height bombs =
+  ( { grid = fst (Grid.init width height bombs)
     , counter = 0
     }
   , Effects.none

@@ -4,6 +4,7 @@ import StartApp as StartApp
 
 import Grid
 import Effects exposing (Effects)
+import Now
 
 app : StartApp.App Model
 app = StartApp.start
@@ -25,7 +26,7 @@ type Action = Increment | Decrement | GridAction Grid.Action | FetchedData (Mayb
 
 init : Int -> Int -> Int -> (Model, Effects Action)
 init width height bombs =
-  ( { grid = fst (Grid.init width height bombs)
+  ( { grid = fst (Grid.init Now.loadTime width height bombs)
     , counter = 0
     }
   , Effects.none

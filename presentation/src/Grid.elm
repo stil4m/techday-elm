@@ -13,19 +13,22 @@ type alias Tile =
 
 type alias GridRow = List Tile
 type alias Model = List GridRow
-type Action = BoxAction Int Box.Action
+type Action = BoxAction Int Box.Action | SeedRequest
 
-init : Int -> Int -> Int -> (Model, Effects Action)
-init width height bombs =
+init : Int -> Int -> Int -> Int -> (Model, Effects Action)
+init now width height bombs =
   let
-    (s, shuffled) = shuffle (initialSeed 1) (width * height)
+    (s, shuffled) = shuffle (initialSeed now) (width * height)
     posses = List.take bombs shuffled
   in
     ( List.map
         (\h -> initRow posses (h*width) width)
         [0..(height-1)]
-    , Effects.none
+    , requestSeed
     )
+
+requestSeed : Effects Action
+requestSeed = Effects.none
 
 shuffle : Seed -> Int -> (Seed, List Int)
 shuffle seed n =
@@ -87,3 +90,4 @@ update action model =
           model
       , Effects.none
       )
+    SeedRequest -> (model, Effects.none)

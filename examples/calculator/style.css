@@ -1,0 +1,23 @@
+.app {
+  width: 160px;
+}
+.action-button {
+  float: left;
+  padding: 5px;
+}
+button {
+  font-size: 20px;
+  height: 30px;
+  width: 30px;
+}
+.screen {
+  width: 140px;;
+  margin : 5px;
+  padding: 5px;
+  border: 1px solid black;
+  text-align: right;
+}
+
+body {
+  font-family: Helvetica;
+}

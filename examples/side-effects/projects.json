@@ -1,13 +1,17 @@
 [{
   "key": "RFJC",
-  "name": "Relations for JIRA Cloud"
+  "name": "Relations for JIRA Cloud",
+  "lead": "gerstree"
 }, {
   "key": "MORE",
-  "name": "MoreApp"
+  "name": "MoreApp",
+  "lead": "janbakke"
 }, {
   "key": "AM",
-  "name": "Avisi Marketing"
+  "name": "Avisi Marketing",
+  "lead": null
 }, {
   "key": "ADM",
-  "name": "Administratie"
+  "name": "Administratie",
+  "lead": "barjanse"
 }]

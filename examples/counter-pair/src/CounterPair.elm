@@ -2,12 +2,12 @@ module CounterPair (update,view,model) where
 
 import Html exposing (..)
 
-type alias Model = String
+type alias Model = {}
 
 type Action = TODO
 
 model : Model
-model = "S"
+model = {}
 
 view : Signal.Address Action -> Model -> Html
 view address model = div [] []

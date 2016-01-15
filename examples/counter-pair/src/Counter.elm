@@ -5,15 +5,8 @@ import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 
 
--- MODEL
-
-
 type alias Model =
     Int
-
-
-
--- UPDATE
 
 
 type Action
@@ -29,10 +22,6 @@ update action model =
 
         Decrement ->
             model - 1
-
-
-
--- VIEW
 
 
 view : Signal.Address Action -> Model -> Html

@@ -2,4 +2,4 @@
   a) model
   b) view
   c) update
-2. Update Index
+2. Update Index.elm

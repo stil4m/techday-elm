@@ -1,0 +1,5 @@
+1. Create counter pair
+  a) model
+  b) view
+  c) update
+2. Update Index

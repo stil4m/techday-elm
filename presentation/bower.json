@@ -1,0 +1,22 @@
+{
+  "name": "elm",
+  "homepage": "https://github.com/stil4m/techday-elm",
+  "authors": [
+    "Mats Stijlaart <m.stijlaart@avisi.nl>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~3.2.0",
+    "jquery": "~2.2.0"
+  }
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Techday Elm</title>
+
+  <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="bower_components/reveal.js/css/theme/beige.css" id="theme">
+
+  <link rel="stylesheet" href="styles/zenburn.css">
+  <style>
+    pre.haskell code {
+      padding: 20px;
+    }
+  </style>
+
+  <link rel="icon" href="images/favicon.ico">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="reveal">
+  <img id="myLogo" src="images/avisi.png" style="
+                        position: absolute;
+                        bottom: 50px;
+                        left: 50px;
+                        height: 80px;">
+
+  <div class="slides">
+
+    <!-- Title -->
+    <section>
+      <h1>Techday Elm</h1>
+      <p>Mats Stijlaart, 2015-01-28</p>
+      <p><a href="mailto:m.stijlaart@avisi.nl">m.stijlaart@avisi.nl</a> / <a
+              href="https://twitter.com/stil4m">@stil4m</a></p>
+    </section>
+
+    <!-- Why? -->
+    <section>
+      <h1>Why?</h1>
+      <div class="fragment fade-in">
+        <p>Because of reasons</p>
+        <img src="images/troll-face.png">
+      </div>
+    </section>
+
+    <!-- Because (1) -->
+    <section>
+      <section>
+        <h1>Because (1)</h1>
+        <h2>you need to change</h2>
+      </section>
+      <section>
+        <img src="images/cobol.png">
+      </section>
+      <section>
+        <img src="images/java-duke.jpg">
+      </section>
+      <section>
+        <img src="images/java-plumber.jpg">
+      </section>
+    </section>
+
+    <!-- Because (2) -->
+    <section>
+      <section>
+        <h1>Because (2)</h1>
+        <h2>of the history of programming (ish)</h2>
+        <table>
+          <tbody>
+          <tr>
+            <td>
+              <ul>
+                <li class="fragment fade-in">Assembly</li>
+                <li class="fragment fade-in">C</li>
+                <li class="fragment fade-in">Java</li>
+                <li class="fragment fade-in">Javascript</li>
+              </ul>
+            </td>
+            <td>
+              <ul style="list-style: none">
+                <li class="fragment fade-in">
+                  <em>Maintainability</em>
+                </li>
+                <li class="fragment fade-in">
+                  <em>Memory management</em>
+                </li>
+                <li class="fragment fade-in">
+                  <em>All those types!</em>
+                </li>
+                <li class="fragment fade-in">
+                  <em>Maintainability</em>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <!-- Because (3) -->
+    <section>
+      <section>
+        <h1>Because (3)</h1>
+        <h2>We have to choose libraries and frameworks</h2>
+      </section>
+      <section>
+        <h1>Optimistic</h1>
+        <img src="images/little-pony-happy.png">
+      </section>
+      <section>
+        <h1>Reality</h1>
+        <img src="images/little-pony-sad.jpg">
+      </section>
+    </section>
+
+    <!-- Because (4) -->
+    <section>
+      <section>
+        <h1>Because (4)</h1>
+        <h2>(imho) Javascript is the new PHP</h2>
+      </section>
+    </section>
+
+    <!-- Goal -->
+    <section>
+      <section>
+        <h1>Goal</h1>
+        <ul>
+          <li class="fragment fade-in">Use the concepts you encounter</li>
+          <li class="fragment fade-in">Do some hacking</li>
+          <li class="fragment fade-in">Consider to use Elm</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- Why would you use Elm? -->
+    <section>
+      <section>
+        <h1>Why use Elm?</h1>
+        <ul>
+          <li class="fragment fade-in">Purity</li>
+          <li class="fragment fade-in">Immutable</li>
+          <li class="fragment fade-in">Forces architecture</li>
+          <li class="fragment fade-in">Designed for front-end</li>
+          <li class="fragment fade-in">Tooling: repl, packages, reactor</li>
+          <li class="fragment fade-in">Time Traveling Debugger</li>
+          <li class="fragment fade-in">New community, no ambiguities</li>
+          <li class="fragment fade-in">Virtual DOM</li>
+          <li class="fragment fade-in">Memoization</li>
+        </ul>
+      </section>
+      <section>
+        <img src="images/elm-performance.png">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Reactivity</h1>
+      </section>
+      <section>
+        <h3>Signals</h3>
+        <img src="images/elm-signals.png">
+      </section>
+      <section>
+        <h3>Real-life example</h3>
+        <img src="images/volunteer.jpg">
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Crash Course</h1>
+      </section>
+      <section>
+        <h2>Functions</h2>
+        <pre data-snippet="snippets/course/functions.elm"></pre>
+      </section>
+      <section>
+        <h2>Types</h2>
+        <pre data-snippet="snippets/course/types.elm"></pre>
+      </section>
+      <section>
+        <h2>Pattern Matching</h2>
+        <pre data-snippet="snippets/course/pattern-matching.elm"></pre>
+      </section>
+      <section>
+        <h2>let ... in</h2>
+        <pre data-snippet="snippets/course/let-in.elm"></pre>
+      </section>
+      <section>
+        <h2>Lists</h2>
+        <pre data-snippet="snippets/course/lists.elm"></pre>
+      </section>
+      <section>
+        <h2>Tuples</h2>
+        <pre data-snippet="snippets/course/tuples.elm"></pre>
+      </section>
+      <section>
+        <h2>Union Types</h2>
+        <pre data-snippet="snippets/course/union-types.elm"></pre>
+      </section>
+      <section>
+        <h2>Union Types</h2>
+        <h3>With Values</h3>
+        <pre data-snippet="snippets/course/union-types-values.elm"></pre>
+      </section>
+      <section>
+        <h2>Polymorphic Unions</h2>
+        <pre data-snippet="snippets/course/polymorphic-unions.elm"></pre>
+      </section>
+      <section>
+        <h2>Records</h2>
+        <pre data-snippet="snippets/course/records.elm"></pre>
+      </section>
+    </section>
+
+    <!-- Compiler -->
+    <section>
+      <section>
+        <h1>Compiler</h1>
+        <h2>(the beast)</h2>
+      </section>
+      <section>
+        <h2>Types</h2>
+        <pre data-snippet="snippets/course/compilers-types-code.elm"></pre>
+        <pre data-snippet="snippets/course/compilers-types-message.elm"></pre>
+      </section>
+      <section>
+        <h2>Suggestions</h2>
+        <pre data-snippet="snippets/course/compilers-suggestions-code.elm"></pre>
+        <pre data-snippet="snippets/course/compilers-suggestions-message.elm"></pre>
+      </section>
+      <section>
+        <h2>Typo</h2>
+        <pre data-snippet="snippets/course/compilers-typo-code.elm"></pre>
+        <pre data-snippet="snippets/course/compilers-typo-message.elm"></pre>
+      </section>
+    </section>
+
+    <!-- Demo -->
+    <section>
+      <section>
+        <h1>Demo</h1>
+
+        <ul>
+          <li>Signals</li>
+          <li>Start-app</li>
+        </ul>
+      </section>
+    </section>
+
+    <!--Time Traveling Debugger-->
+    <section>
+      <section>
+        <h1>Time Traveling Debugger</h1>
+      </section>
+      <section>
+        <video controls id="time-traveling-debugger" src="video/time-traveling-debugger.mp4#t=642,860"></video>
+      </section>
+    </section>
+
+    <!-- Hands on -->
+    <section>
+      <section>
+        <h1>Hands on</h1>
+        
+      </section>
+    </section>
+  </div>
+</div>
+
+<script src="bower_components/headjs/dist/1.0.0/head.min.js"></script>
+<script src="bower_components/reveal.js/js/reveal.js"></script>
+<script type="text/javascript">
+
+  var promises = $("pre[data-snippet]").map(function (i, y) {
+    return new Promise(function (accept, reject) {
+      var el = $(y);
+      $.get(el.data('snippet'))
+              .success(function (code) {
+                el.addClass("haskell")
+                        .html("<code>" + code + "</code>");
+                accept();
+              })
+    })
+  });
+
+  Promise.all(promises).then(function () {
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+      dependencies: [
+        {
+          src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+        }
+      ]
+    })
+  });
+</script>
+</body>
+
+</html>

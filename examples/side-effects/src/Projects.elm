@@ -9,12 +9,26 @@ import Html.Attributes exposing (style)
 import Effects exposing (Never, Effects)
 import Result
 
+
 type Action
     = FetchedProjects Projects
 
 
 type alias Model =
     Projects
+
+
+type Projects
+    = Loading
+    | Error String
+    | Success (List Project)
+
+
+type alias Project =
+    { key : String
+    , name : String
+    , lead : Maybe String
+  }
 
 
 init : ( Model, Effects Action )
@@ -60,10 +74,13 @@ projectItem : Project -> Html.Html
 projectItem project =
     li
         []
-        [ text (project.name ++ " (" ++ project.key ++ "/"  ++ (toLead project.lead) ++ ")") ]
+        [ text (project.name ++ " (" ++ project.key ++ "/" ++ (toLead project.lead) ++ ")") ]
+
 
 toLead : Maybe String -> String
-toLead = Maybe.withDefault "UNKNOWN"
+toLead =
+    Maybe.withDefault "UNKNOWN"
+
 
 update : Action -> Model -> ( Model, Effects Action )
 update action model =
@@ -75,6 +92,7 @@ update action model =
 
 {- Fetch projects -}
 
+
 getProjects : Effects Projects
 getProjects =
     delayFetch
@@ -84,7 +102,8 @@ getProjects =
 
 
 delayFetch : Task Http.Error (List Project)
-delayFetch = Task.andThen (Task.sleep 2000) (\_ -> fetch)
+delayFetch =
+    Task.andThen (Task.sleep 0) (\_ -> fetch)
 
 
 toListOrError : Result Http.Error (List Project) -> Projects
@@ -100,16 +119,6 @@ toListOrError x =
 fetch : Task Http.Error (List Project)
 fetch =
     Http.get projects "http://localhost:8000/projects.json"
-
-
-type Projects
-    = Loading
-    | Error String
-    | Success (List Project)
-
-
-type alias Project =
-    { key : String, name : String, lead : Maybe String }
 
 
 projects : Json.Decoder (List Project)

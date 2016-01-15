@@ -1,0 +1,80 @@
+- Title
+
+- Why?
+  - Because of reasons. Not good enough.
+
+- Because (1)
+  - Cobol
+  - Java?
+  - Plumbers
+
+- Because (2) (Evan Czaplicki - Let's be mainstream! User focused design in Elm)
+  - The history of programming
+    - Assembly (maintainability)
+    - C (Mem managment)
+    - Java (All those freaking types)
+    - JavaScript (maintainability)
+
+- Because (3)
+
+- Because (4)
+  - Optimistic
+    -
+  - Angular? React?
+    - Who is using it?
+    - It does not have the everlasting life
+    - Where do you initialize your controllers? What is the form of your MVC and is it consistent.
+    - You are able to take 'shortcuts'
+  - 'It takes time to get used, but it just works'
+
+- Goal
+  - Not saying you should use Elm.
+  - Use the concepts introduced
+  - Do some hacking
+
+- Why would you use Elm?
+  - Concepts
+    - Purity
+    - Immutable
+    - Forces architecture
+    - Designed for Front-end
+    - Tooling Repl / Packages / Reactor
+    - Time Traveling Debugger (demo in the end)
+    - New community. No ambiguities. Styling
+    - Virtual DOM
+    - Memoization
+  - Performance
+
+- Reactivity
+  - Signals
+  - Game
+
+- Elm Syntax Crash Course (Elm Programming Language by Jesse Williamson)
+  - Functions
+  - Pattern Matching
+  - Let ... in
+  - Lists
+  - Tuple ("toepel", "tuppel")
+  - Union Types
+  - Union Types with Values
+  - Polymorphic Unions
+  - Records
+  - Records Updating
+
+- Compiler
+  - Strength in the compiler
+  - Types
+  - Suggestions
+  - Typo
+
+- Demo
+  - Signals
+  - SimpleApp
+
+- Time traveling debugger
+
+- Hands-on
+
+
+- Resources
+  - Thesis

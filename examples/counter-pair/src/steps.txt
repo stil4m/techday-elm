@@ -1,5 +1,39 @@
 1. Create counter pair
-  a) model
-  b) view
-  c) update
+  a) type
+  b) model
+  c) actions
+  d) update
+  e) view
 2. Update Index.elm
+
+
+1a
+type alias Model =
+    { top : Counter.Model, bottom : Counter.Model }
+
+
+1b
+model =
+    { top = 0, bottom = 0 }
+
+1c
+type Action
+    = Top Counter.Action
+    | Bottom Counter.Action
+
+1d
+update action model =
+    case action of
+        Top x ->
+            { model | top = Counter.update x model.top }
+
+        Bottom x ->
+            { model | bottom = Counter.update x model.bottom }
+
+1e
+view address model =
+    div
+        []
+        [ Counter.view (Signal.forwardTo address Top) model.top
+        , Counter.view (Signal.forwardTo address Bottom) model.bottom
+        ]

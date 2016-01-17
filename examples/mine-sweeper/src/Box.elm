@@ -1,4 +1,4 @@
-module Box (Model, Action, init, makeMine, update, view) where
+module Box (BoxType, Model, Action, isEmpty, initWithHint, initAsEmpty, initAsMine, revealAction, update, view) where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -24,19 +24,37 @@ type Action
     | Mark
 
 
+isEmpty : Model -> Bool
+isEmpty m =
+    m.isOpened && m.form == Empty
+
+
+revealAction : Action
+revealAction =
+    Reveal
+
+
 init : BoxType -> Model
-init form =
-    { form = form
+init f =
+    { form = f
     , isOpened = False
     , isMarked = False
     }
 
 
-makeMine : Model -> Model
-makeMine model =
-    { model
-        | form = Mine
-    }
+initWithHint : Int -> Model
+initWithHint h =
+    init (Hint h)
+
+
+initAsEmpty : Model
+initAsEmpty =
+    init Empty
+
+
+initAsMine : Model
+initAsMine =
+    init Mine
 
 
 reveal : Model -> Model
@@ -51,9 +69,7 @@ reveal model =
 
 mark : Model -> Model
 mark model =
-    { model
-        | isMarked = not model.isMarked
-    }
+    { model | isMarked = not model.isMarked}
 
 
 update : Action -> Model -> Model
@@ -78,8 +94,7 @@ baseBox =
 
 bombBox : List ( String, String )
 bombBox =
-    [ ( "text-align", "center" )
-    ]
+    [ ( "text-align", "center" ) ]
         ++ baseBox
 
 
@@ -91,37 +106,67 @@ markedBox =
 
 view : Signal.Address Action -> Model -> Html
 view address model =
-    if model.isOpened then
-        case model.form of
-            Mine ->
-                div
-                    [ attribute "class" "tile", style bombBox ]
-                    [ img
-                        [ attribute "src" "http://vignette2.wikia.nocookie.net/tibia/images/a/a5/Ultimate_Explosion.gif/revision/latest?cb=20050528232132&path-prefix=en"
-                        , attribute "width" "18"
-                        , attribute "height" "18"
-                        ]
-                        []
-                    ]
+    case model.isOpened of
+        True ->
+            case model.form of
+                Mine ->
+                    viewMine
 
-            Hint x ->
-                div [ attribute "class" "tile", style baseBox ] [ text << toString <| x ]
+                Hint x ->
+                    viewHint x
 
-            Empty ->
-                div [ attribute "class" "tile", style baseBox ] []
-    else if model.isMarked then
-        div
-            [ class "tile marked"
-            , style markedBox
-            , onClick address Reveal
-            , onRightClick address Mark
-            ]
-            [ text "" ]
-    else
-        div
-            [ class "tile"
-            , style baseBox
-            , onClick address Reveal
-            , onRightClick address Mark
+                Empty ->
+                    viewEmpty
+
+        False ->
+            case model.isMarked of
+                True ->
+                    viewMarked address
+
+                False ->
+                    viewUnknown address
+
+
+viewMine : Html.Html
+viewMine =
+    div
+        [ attribute "class" "tile", style bombBox ]
+        [ img
+            [ attribute "src" "http://vignette2.wikia.nocookie.net/tibia/images/a/a5/Ultimate_Explosion.gif/revision/latest?cb=20050528232132&path-prefix=en"
+            , attribute "width" "18"
+            , attribute "height" "18"
             ]
             []
+        ]
+
+
+viewHint : Int -> Html.Html
+viewHint x =
+    div [ attribute "class" "tile", style baseBox ] [ text << toString <| x ]
+
+
+viewEmpty : Html.Html
+viewEmpty =
+    div [ attribute "class" "tile", style baseBox ] [ text "0" ]
+
+
+viewMarked : Signal.Address Action -> Html.Html
+viewMarked address =
+    div
+        [ class "tile marked"
+        , style markedBox
+        , onClick address Reveal
+        , onRightClick address Mark
+        ]
+        [ text "" ]
+
+
+viewUnknown : Signal.Address Action -> Html.Html
+viewUnknown address =
+    div
+        [ class "tile"
+        , style baseBox
+        , onClick address Reveal
+        , onRightClick address Mark
+        ]
+        []

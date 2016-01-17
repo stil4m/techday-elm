@@ -1,13 +1,12 @@
 module Grid (Model, GridRow, Action, init, update, view) where
 
-import Box
-import Html exposing (table, tr, td)
+import Html exposing (table, tr, td, text)
 import Effects exposing (Effects)
-import Random exposing (Seed, initialSeed)
-
+import GridUtil exposing (getPositions, BoxState, Position)
+import Box exposing (BoxType, isEmpty)
 
 type alias Tile =
-    { id : Int
+    { id : Position
     , box : Box.Model
     }
 
@@ -21,100 +20,107 @@ type alias Model =
 
 
 type Action
-    = BoxAction Int Box.Action
-    | SeedRequest
+    = BoxAction Position Box.Action
 
 
-init : Int -> Int -> Int -> Int -> ( Model, Effects Action )
+init : Int -> Int -> Int -> Int -> Model
 init now width height bombs =
-    let
-        ( s, shuffled ) = shuffle (initialSeed now) (width * height)
-
-        posses = List.take bombs shuffled
-    in
-        ( List.map
-            (\h -> initRow posses (h * width) width)
-            [0..(height - 1)]
-        , requestSeed
-        )
+    List.map initRow (locationsToRows height <| getPositions now width height bombs)
 
 
-requestSeed : Effects Action
-requestSeed =
-    Effects.none
+locationsToRows : Int -> List ( Position, BoxState ) -> List (List ( Position, BoxState ))
+locationsToRows height locations =
+    List.map (\x -> (fst (List.partition (fst >> fst >> (==) x) locations))) [0..(height - 1)]
 
 
-shuffle : Seed -> Int -> ( Seed, List Int )
-shuffle seed n =
-    let
-        numbers = [0..(n - 1)]
 
-        ( newSeed, result ) =
-            List.foldl
-                (\a ( s, xs ) ->
-                    let
-                        ( v, ns ) = Random.generate (Random.float 0 1) s
-                    in
-                        ( ns, ( v, a ) :: xs )
-                )
-                ( seed, [] )
-                numbers
-    in
-        ( newSeed
-        , List.map snd (List.sortBy fst result)
-        )
-
-
-initRow : List Int -> Int -> Int -> GridRow
-initRow bombPositions idOffset length =
+initRow : List ( Position, BoxState ) -> GridRow
+initRow positions =
     List.map
-        (\a -> Tile (idOffset + a) (Box.init (List.member (idOffset + a) bombPositions)))
-        [0..(length - 1)]
+        (\( pos, boxState ) -> Tile pos (initBox boxState))
+        positions
+
+
+initBox : BoxState -> Box.Model
+initBox boxState =
+    case boxState of
+        -1 ->
+            Box.initAsMine
+
+        0 ->
+            Box.initAsEmpty
+
+        hint ->
+            Box.initWithHint hint
 
 
 view : Signal.Address Action -> Model -> Html.Html
 view address grid =
     table
         []
-        (List.map
-            (viewRow address)
-            grid
-        )
+        (List.map (viewRow address) grid)
 
 
 viewRow : Signal.Address Action -> GridRow -> Html.Html
 viewRow address row =
     tr
         []
-        (List.map
-            (\tile -> td [] [ Box.view (Signal.forwardTo address (BoxAction tile.id)) tile.box ])
-            row
-        )
+        (List.map (viewTile address) row)
 
 
-updateTile : Int -> Box.Action -> Tile -> Tile
-updateTile id action tile =
-    if
-        tile.id == id
-    then
-        (Tile tile.id (Box.update action tile.box))
+viewTile : Signal.Address Action -> Tile -> Html.Html
+viewTile address tile =
+    td
+        []
+        [ Box.view (Signal.forwardTo address (BoxAction tile.id)) tile.box ]
+
+
+mapAllTiles : (Tile -> ( Tile, List Action )) -> Model -> ( Model, List Action )
+mapAllTiles f rows =
+    let
+        ( newRows, effects ) = List.unzip (List.map (mapAllRowTiles f) rows)
+    in
+        ( newRows, List.concat effects )
+
+
+mapAllRowTiles : (Tile -> ( Tile, List Action )) -> GridRow -> ( GridRow, List Action )
+mapAllRowTiles f row =
+    let
+        ( rowTiles, effects ) = List.unzip (List.map f row)
+    in
+        ( rowTiles, List.concat effects )
+
+
+updateTile : Position -> Box.Action -> Tile -> ( Tile, List Action )
+updateTile id a tile =
+    if tile.id /= id then
+        ( tile, [] )
     else
-        tile
+        let
+            newTile = { tile | box = (Box.update a tile.box) }
+        in
+            if not tile.box.isOpened && Box.isEmpty newTile.box then
+                ( newTile, List.map (\x -> BoxAction x Box.revealAction) (surroundingTiles id) )
+            else
+                ( newTile, [] )
+
+
+surroundingTiles : Position -> List Position
+surroundingTiles position =
+    let
+        ( x, y ) = position
+        square = List.concatMap (\x -> List.map ((,) x) [ y - 1, y, y + 1 ]) [ x - 1, x, x + 1 ]
+    in
+        List.filter ((/=) position) square
 
 
 update : Action -> Model -> ( Model, Effects Action )
 update action model =
     case action of
-        BoxAction id act ->
-            ( List.map
-                (\row ->
-                    List.map
-                        (updateTile id act)
-                        row
-                )
-                model
-            , Effects.none
-            )
+        BoxAction id boxAction ->
+            let
+                ( newModel, additionalChanges ) = mapAllTiles (updateTile id boxAction) model
 
-        SeedRequest ->
-            ( model, Effects.none )
+                newModelRec = List.foldl (\additonal m -> fst (update additonal m)) newModel additionalChanges
+            in
+                ( newModelRec, Effects.none )

@@ -1,16 +1,28 @@
-module CounterPair (update,view,model) where
+module CounterPair (update, view, model) where
 
 import Html exposing (..)
 
-type alias Model = {}
 
-type Action = TODO
+type alias Model =
+    {}
+
+
+type Action
+    = TODO
+
 
 model : Model
-model = {}
+model =
+    {}
+
 
 view : Signal.Address Action -> Model -> Html
-view address model = div [] []
+view address model =
+    div [] []
+
 
 update : Action -> Model -> Model
-update action model = model
+update action model =
+    case action of
+        TODO ->
+            model

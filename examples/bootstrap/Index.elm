@@ -8,7 +8,7 @@ import Maybe exposing (withDefault)
 
 
 type alias Model =
-    { users : List UserRecord
+    { users : List User
     }
 
 
@@ -18,19 +18,19 @@ initialModel =
     }
 
 
-port addUser : Signal (Maybe UserRecord)
-
+port addUser : Signal (Maybe User)
 port userCount : Signal Int
 port userCount =
-  Signal.map List.length (Signal.map .users model)
+    Signal.map List.length <| Signal.map .users model
 
-type alias UserRecord =
+
+type alias User =
     { name : String, age : Int }
 
 
 type Action
     = NoOp
-    | NewUser UserRecord
+    | NewUser User
 
 
 update : Action -> Model -> Model
@@ -48,23 +48,35 @@ view actions model =
     div_
         [ h1 [] [ text "Elm Content" ]
         , tableStriped_
-            [ thead_ [ tr_ [ th_ [ text "Name" ], th_ [ text "Age" ] ] ]
-            , tbody_ (renderUsers model.users)
+            [ userHeader [ "Name", "Age" ]
+            , userBody model.users
             ]
         ]
 
 
-renderUsers : List UserRecord -> List Html
+userHeader : List String -> Html
+userHeader hs =
+    thead_ [ tr_ (List.map (\h -> th_ [ text h ]) hs) ]
+
+
+userBody : List User -> Html
+userBody users =
+    tbody_ (renderUsers users)
+
+
+renderUsers : List User -> List Html
 renderUsers users =
     List.map renderUser users
 
 
-renderUser : UserRecord -> Html
+renderUser : User -> Html
 renderUser user =
-    tr_
-        [ td_ [ (text user.name) ]
-        , td_ [ (user.age |> toString >> text) ]
-        ]
+    tr_ [ renderCol user.name, renderCol user.age ]
+
+
+renderCol : a -> Html
+renderCol a =
+    td_ [ (text (toString a)) ]
 
 
 main : Signal Html
@@ -74,7 +86,8 @@ main =
 
 model : Signal Model
 model =
-    (Signal.foldp update initialModel (Signal.merge actionMailbox.signal onAddUser))
+    Signal.merge actionMailbox.signal onAddUser
+        |> Signal.foldp update initialModel
 
 
 actionMailbox : Signal.Mailbox Action

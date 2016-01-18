@@ -1,6 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Elm Interop examples",
+    "repository": "https://github.com/user/todo.git",
     "license": "BSD3",
     "source-directories": [
         "."

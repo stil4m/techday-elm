@@ -71,12 +71,12 @@ renderUsers users =
 
 renderUser : User -> Html
 renderUser user =
-    tr_ [ renderCol user.name, renderCol user.age ]
+    tr_ [ renderCol .name user, renderCol (.age >> toString) user]
 
 
-renderCol : a -> Html
-renderCol a =
-    td_ [ (text (toString a)) ]
+renderCol : (User -> String) -> User -> Html
+renderCol f u =
+    td_ [ (text (f u)) ]
 
 
 main : Signal Html

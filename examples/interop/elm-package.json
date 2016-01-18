@@ -1,7 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "bootstrap 4 elements for Elm",
-    "repository": "https://github.com/stil4m/elm-bootstrap.git",
+    "summary": "Elm Interop examples",
     "license": "BSD3",
     "source-directories": [
         "."

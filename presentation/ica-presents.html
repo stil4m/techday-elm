@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ICA - Presents</title>
+
+  <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="bower_components/reveal.js/css/theme/beige.css" id="theme">
+
+  <link rel="stylesheet" href="styles/zenburn.css">
+  <style>
+    .reveal pre {
+      width: 100%;
+      margin: 5px auto;
+    }
+
+    pre code {
+      padding: 20px !important;
+    }
+  </style>
+
+  <link rel="icon" href="images/favicon.ico">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="reveal">
+  <img id="myLogo" src="images/avisi.png" style="
+                        position: absolute;
+                        bottom: 50px;
+                        left: 50px;
+                        height: 80px;">
+
+  <div class="slides">
+
+    <!-- Title -->
+    <section>
+      <h1>ICA Presents - <br>Browser Programming</h1>
+      <p>Mats Stijlaart, 2015-01-21</p>
+      <p><a href="mailto:m.stijlaart@avisi.nl">m.stijlaart@avisi.nl</a> / <a
+              href="https://twitter.com/stil4m">@stil4m</a></p>
+    </section>
+
+    <!-- About -->
+    <section>
+      <section>
+        <h2>Me</h2>
+        <img src="images/me.png" height="300">
+      </section>
+      <section>
+        <h2>Avisi</h2>
+        <img src="images/avisi-map.png" width="500">
+      </section>
+      <section>
+        <h2>Tosti Talks</h2>
+        <img src="images/tosti.jpg">
+        <p>TODO - Topics</p>
+      </section>
+    </section>
+
+    <!-- Why we do JS -->
+    <section>
+      <section>
+        <h1>Why we do Javascript</h1>
+      </section>
+      <section>
+        <h2>Setup</h2>
+        <table>
+          <thead>
+          <tr>
+            <th>Javascript</th>
+            <th>Java</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Simple</td>
+            <td>Hard</td>
+          </tr>
+          <tr>
+            <td>
+              <pre class="javascript" data-snippet="snippets/ica-presents/setup.js_"></pre>
+            </td>
+            <td>
+              <pre class="java" data-snippet="snippets/ica-presents/setup.java"></pre>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>Tooling</h2>
+        <table>
+          <thead>
+          <tr>
+            <th>Javascript</th>
+            <th>Java</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>npm, NodeJS</td>
+            <td>Maven, Ant, Gradle</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>Learning Curve</h2>
+        <table>
+          <thead>
+          <tr>
+            <th>Javascript</th>
+            <th>Java</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <pre class="javascript" data-snippet="snippets/ica-presents/learning-curve.js_"></pre>
+            </td>
+            <td>
+              <pre class="javascript" data-snippet="snippets/ica-presents/learning-curve.java"></pre>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h2>It's not the promised land</h2>
+      </section>
+      <section>
+        <h2>The community lacks quality</h2>
+        <ul>
+          <li class="fragment fade-in">Too easy to publish</li>
+          <li class="fragment fade-in">Semantic Versioning (SemVer)</li>
+          <li class="fragment fade-in">Testing</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What is 'this'?!</h2>
+        <pre class="javascript" data-snippet="snippets/ica-presents/what-is-this.js_"></pre>
+      </section>
+      <section>
+        <h2>Inconsistent</h2>
+        <table>
+          <tr>
+            <td>1.</td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>1 == "1"</code></pre>
+            </td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>true</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>1 == "true"</code></pre>
+            </td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>false</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>true == "1"</code></pre>
+            </td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>true</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>true == "true"</code></pre>
+            </td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>false</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>5.</td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>!true == !"true"</code></pre>
+            </td>
+            <td class="fragment fade-in">
+              <pre class="javascript"><code>true</code></pre>
+            </td>
+          </tr>
+        </table>
+        <a href="https://www.destroyallsoftware.com/talks/wat"
+           class="fragment fade-in">
+          https://www.destroyallsoftware.com/talks/wat
+        </a>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <blockquote>Javascript has a great platform. It's not a great language.</blockquote>
+      </section>
+      <section>
+        <h2>Maintainability</h2>
+      </section>
+      <section>
+        <h3>Thing break for no <strong style="text-decoration: underline">good</strong> reason.</h3>
+      </section>
+      <section>
+        <h3>What the hell is <code>opts</code>?</h3>
+        <pre class="javascript"><code>function calculatePi (opts) { ... }</code></pre>
+      </section>
+      <section>
+        <h3>What the hell is <code>true</code>?</h3>
+        <pre class="javascript"><code>fetchUser(userId);&#13;fetchUser(userId, true);</code></pre>
+      </section>
+      <section>
+        <blockquote>The main(tainability) problem is the fact that the language/community allows you to create bad code.</blockquote>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1>Search for better solutions</h1>
+      </section>
+      <section>
+        <h3>Alternatives</h3>
+        <ul>
+          <li class="fragment fade-in">Better editors</li>
+          <li class="fragment fade-in">Conventions</li>
+          <li class="fragment fade-in">Architecture</li>
+          <li class="fragment fade-in">JSHint</li>
+          <li class="fragment fade-in">Types <em class="fragment fade-in">(This is where JS ends)</em> </li>
+          <li class="fragment fade-in">Compilation</li>
+          <li class="fragment fade-in">Static Types</li>
+        </ul>
+      </section>
+      <section>
+        <h3>What does Avisi do?</h3>
+        <ul>
+          <li class="fragment fade-in">New technologies (ClojureScript)</li>
+          <li class="fragment fade-in">Tosti Talks</li>
+          <li class="fragment fade-in">Techday (Elm)</li>
+        </ul>
+      </section>
+    </section>
+  </div>
+</div>
+
+<script src="bower_components/headjs/dist/1.0.0/head.min.js"></script>
+<script src="bower_components/reveal.js/js/reveal.js"></script>
+<script type="text/javascript">
+
+  var promises = $("pre[data-snippet]").map(function (i, y) {
+    return new Promise(function (accept, reject) {
+      var el = $(y);
+      $.get(el.data('snippet'))
+              .success(function (code) {
+                if (!el.attr('class')) {
+                  el = el.addClass("haskell");
+                }
+                el.html("<code>" + code + "</code>");
+                accept();
+              })
+    })
+  });
+
+  Promise.all(promises).then(function () {
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+      dependencies: [
+        {
+          src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+        }
+      ]
+    })
+  });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+- Why we do JS
+  - setup
+    - JS -> Simple
+    - Java -> Hard
+  - tooling
+    - Java -> Maven, Ant, Gradle
+	- JS -> npm
+  - Learning curve
+    - JS -> short function
+	- Java -> All those types
+  
+- Not only merits
+  - The community lacks quality. Too easy to publish. Semver. Testing.
+  - What is 'this'?
+  - Inconsistent (stringEquals, 0.0 == "0")
+
+- JavaScript is a great platform. Not a great language.
+
+- Maintainability
+  - Things break for no *good* reason.
+  - What the hell is 'opts' in function (opts)
+  - or what the hell is true in 'doSomething("hello", true)', 'doSomething("world")'
+  - the main problem is the language lets you do it.
+    
+- Search for better solutions
+  - Better Editors
+  - Conventions
+  - Architecture
+  - JSHint
+  - Types
+  - Compilation
+  - Static Types
+

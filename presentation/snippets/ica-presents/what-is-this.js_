@@ -1,0 +1,6 @@
+this.x = 10;
+console.log(this.x); //prints: '10'
+
+doSomething(function() {
+    console.log(this.x); //prints: ???
+});

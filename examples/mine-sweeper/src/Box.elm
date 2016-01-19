@@ -69,7 +69,7 @@ reveal model =
 
 mark : Model -> Model
 mark model =
-    { model | isMarked = not model.isMarked}
+    { model | isMarked = not model.isMarked }
 
 
 update : Action -> Model -> Model
@@ -85,11 +85,25 @@ update action model =
 baseBox : List ( String, String )
 baseBox =
     [ ( "border", "1px solid gray" )
-    , ( "border-radius", "5px" )
     , ( "width", "20px" )
     , ( "height", "20px" )
+    , ( "font-weight", "bold")
     , ( "text-align", "center" )
     ]
+
+hintBoxStyle : Int -> List (String, String)
+hintBoxStyle x =
+    (case x of
+      1 -> ("color", "blue")
+      2 -> ("color", "green")
+      3 -> ("color", "red")
+      _ -> ("color", "gray"))
+    :: baseBox
+
+
+emptyBox : List ( String, String )
+emptyBox =
+    ( "background", "#eee" ) :: baseBox
 
 
 bombBox : List ( String, String )
@@ -142,12 +156,12 @@ viewMine =
 
 viewHint : Int -> Html.Html
 viewHint x =
-    div [ attribute "class" "tile", style baseBox ] [ text << toString <| x ]
+    div [ attribute "class" "tile", style (hintBoxStyle x) ] [ text << toString <| x ]
 
 
 viewEmpty : Html.Html
 viewEmpty =
-    div [ attribute "class" "tile", style baseBox ] [ text "0" ]
+    div [ attribute "class" "tile", style emptyBox ] []
 
 
 viewMarked : Signal.Address Action -> Html.Html

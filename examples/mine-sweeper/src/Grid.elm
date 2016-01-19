@@ -1,9 +1,11 @@
-module Grid (Model, GridRow, Action, init, update, view) where
+module Grid (Model, GridRow, Action, init, update, view, markedBoxes) where
 
 import Html exposing (table, tr, td, text)
-import Effects exposing (Effects)
+import Html.Attributes exposing (style)
 import GridUtil exposing (getPositions, BoxState, Position)
 import Box exposing (BoxType, isEmpty)
+import Random exposing (Seed)
+
 
 type alias Tile =
     { id : Position
@@ -22,16 +24,23 @@ type alias Model =
 type Action
     = BoxAction Position Box.Action
 
+markedBoxes : Model -> Int
+markedBoxes m = List.sum (List.map (\row -> List.length (List.filter isMarked row)) m)
 
-init : Int -> Int -> Int -> Int -> Model
-init now width height bombs =
-    List.map initRow (locationsToRows height <| getPositions now width height bombs)
+isMarked : Tile -> Bool
+isMarked tile = tile.box.isMarked
+
+init : Seed -> Int -> Int -> Int -> ( Model, Seed )
+init seed width height bombs =
+    let
+        ( positions, newSeed ) = getPositions seed width height bombs
+    in
+        ( List.map initRow (locationsToRows height <| positions), newSeed )
 
 
 locationsToRows : Int -> List ( Position, BoxState ) -> List (List ( Position, BoxState ))
 locationsToRows height locations =
     List.map (\x -> (fst (List.partition (fst >> fst >> (==) x) locations))) [0..(height - 1)]
-
 
 
 initRow : List ( Position, BoxState ) -> GridRow
@@ -57,7 +66,11 @@ initBox boxState =
 view : Signal.Address Action -> Model -> Html.Html
 view address grid =
     table
-        []
+        [ style
+            [ ( "border-collapse", "collapse" )
+            , ( "border", "1px solid gray" )
+            ]
+        ]
         (List.map (viewRow address) grid)
 
 
@@ -71,7 +84,7 @@ viewRow address row =
 viewTile : Signal.Address Action -> Tile -> Html.Html
 viewTile address tile =
     td
-        []
+        [ style [ ( "padding", "0" ) ] ]
         [ Box.view (Signal.forwardTo address (BoxAction tile.id)) tile.box ]
 
 
@@ -109,18 +122,18 @@ surroundingTiles : Position -> List Position
 surroundingTiles position =
     let
         ( x, y ) = position
+
         square = List.concatMap (\x -> List.map ((,) x) [ y - 1, y, y + 1 ]) [ x - 1, x, x + 1 ]
     in
         List.filter ((/=) position) square
 
 
-update : Action -> Model -> ( Model, Effects Action )
+update : Action -> Model -> Model
 update action model =
     case action of
         BoxAction id boxAction ->
             let
                 ( newModel, additionalChanges ) = mapAllTiles (updateTile id boxAction) model
-
-                newModelRec = List.foldl (\additonal m -> fst (update additonal m)) newModel additionalChanges
+                newModelRec = List.foldl update newModel additionalChanges
             in
-                ( newModelRec, Effects.none )
+                newModelRec

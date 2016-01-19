@@ -11,18 +11,18 @@ type alias Position =
     ( Int, Int )
 
 
-getPositions : Int -> Int -> Int -> Int -> List ( Position, BoxState )
-getPositions now width height bombs =
+getPositions : Seed -> Int -> Int -> Int -> (List ( Position, BoxState ), Seed)
+getPositions seed width height bombs =
     let
         numbers = [0..((width * height) - 1)]
 
         allPositions = List.map (indexToPosition width) numbers
 
-        ( s, shuffled ) = shuffle (initialSeed now) allPositions
+        ( newSeed, shuffled ) = shuffle seed allPositions
 
         bombPosses = List.take bombs shuffled
     in
-        List.map (asPosition bombPosses) allPositions
+        (List.map (asPosition bombPosses) allPositions, newSeed)
 
 
 indexToPosition : Int -> Int -> Position

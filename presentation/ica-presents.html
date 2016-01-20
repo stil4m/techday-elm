@@ -6,9 +6,10 @@
   <title>ICA - Presents</title>
 
   <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
-  <link rel="stylesheet" href="bower_components/reveal.js/css/theme/beige.css" id="theme">
 
+  <link rel="stylesheet" href="styles/avisi.css" id="theme">
   <link rel="stylesheet" href="styles/zenburn.css">
+
   <style>
     .reveal pre {
       width: 100%;
@@ -27,17 +28,13 @@
 <body>
 
 <div class="reveal">
-  <img id="myLogo" src="images/avisi.png" style="
-                        position: absolute;
-                        bottom: 50px;
-                        left: 50px;
-                        height: 80px;">
+  <div class="company"></div>
 
   <div class="slides">
 
     <!-- Title -->
     <section>
-      <h1>ICA Presents - <br>Browser Programming</h1>
+      <h2>ICA Presents - <br>Browser Programming</h2>
       <p>Mats Stijlaart, 2015-01-21</p>
       <p><a href="mailto:m.stijlaart@avisi.nl">m.stijlaart@avisi.nl</a> / <a
               href="https://twitter.com/stil4m">@stil4m</a></p>
@@ -46,24 +43,24 @@
     <!-- About -->
     <section>
       <section>
-        <h2>Me</h2>
-        <img src="images/me.png" height="300">
-      </section>
-      <section>
         <h2>Avisi</h2>
         <img src="images/avisi-map.png" width="500">
       </section>
       <section>
         <h2>Tosti Talks</h2>
         <img src="images/tosti.jpg">
-        <p>TODO - Topics</p>
+        <p>Topics?</p>
       </section>
     </section>
 
     <!-- Why we do JS -->
     <section>
       <section>
-        <h1>Why we do Javascript</h1>
+        <h2>Why we do Javascript</h2>
+      </section>
+      <section>
+        <h2>It runs literally everywhere</h2>
+        <img src="images/literally.jpg">
       </section>
       <section>
         <h2>Setup</h2>
@@ -227,7 +224,7 @@
 
     <section>
       <section>
-        <h1>Search for better solutions</h1>
+        <h2>Search for better solutions</h2>
       </section>
       <section>
         <h3>Alternatives</h3>
@@ -242,12 +239,38 @@
         </ul>
       </section>
       <section>
+        <img src="images/all-the-languages.jpg">
+      </section>
+      <section>
+        <h2>TypeScript</h2>
+        <pre class="javascript" data-snippet="snippets/ica-presents/typescript.ts"></pre>
+        <p>Use existing code, Interfaces</p>
+      </section>
+      <section>
+        <h2>Dart</h2>
+        <pre class="java" data-snippet="snippets/ica-presents/dart.drt"></pre>
+        <p>Java/C style, Optional typing, Synchronize JS</p>
+      </section>
+      <section>
+        <h2>ClojureScript</h2>
+        <pre class="lisp" data-snippet="snippets/ica-presents/clojure.clj"></pre>
+        <p>Functional, Server & Client, Reloading</p>
+      </section>
+      <section>
+        <h2>Elm</h2>
+        <pre class="haskell" data-snippet="snippets/ica-presents/elm.elm"></pre>
+        <p>ML, Functional, Reactive</p>
+      </section>
+      <section>
         <h3>What does Avisi do?</h3>
         <ul>
           <li class="fragment fade-in">New technologies (ClojureScript)</li>
           <li class="fragment fade-in">Tosti Talks</li>
           <li class="fragment fade-in">Techday (Elm)</li>
         </ul>
+      </section>
+      <section>
+        <a href="http://elm-lang.org/try" target="_blank">http://elm-lang.org/try</a>
       </section>
     </section>
   </div>

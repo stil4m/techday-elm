@@ -6,8 +6,10 @@
   <title>ICA - Presents</title>
 
   <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
-
   <link rel="stylesheet" href="styles/avisi.css" id="theme">
+  <!--<link rel="stylesheet" href="bower_components/reveal.js/css/theme/white.css">-->
+  <link rel="stylesheet" href="bower_components/reveal.js/css/print/pdf.css">
+
   <link rel="stylesheet" href="styles/zenburn.css">
 
   <style>
@@ -133,7 +135,7 @@
       <section>
         <h2>The community lacks quality</h2>
         <ul>
-          <li class="fragment fade-in">Too easy to publish</li>
+          <li class="fragment fade-in">Too easy to publish (229,320)</li>
           <li class="fragment fade-in">Semantic Versioning (SemVer)</li>
           <li class="fragment fade-in">Testing</li>
         </ul>
@@ -206,7 +208,7 @@
         <h2>Maintainability</h2>
       </section>
       <section>
-        <h3>Thing break for no <strong style="text-decoration: underline">good</strong> reason.</h3>
+        <h3>Thing tend to break for no <strong style="text-decoration: underline">good</strong> reason.</h3>
       </section>
       <section>
         <h3>What the hell is <code>opts</code>?</h3>
@@ -232,7 +234,7 @@
           <li class="fragment fade-in">Conventions</li>
           <li class="fragment fade-in">Architecture</li>
           <li class="fragment fade-in">JSHint</li>
-          <li class="fragment fade-in">Types <em class="fragment fade-in">(This is where JS ends)</em> </li>
+          <li class="fragment fade-in">Types <em class="fragment fade-in">(This is where JS ends)</em></li>
           <li class="fragment fade-in">Compilation</li>
           <li class="fragment fade-in">Static Types</li>
         </ul>
@@ -308,9 +310,10 @@
       transition: 'slide', // none/fade/slide/convex/concave/zoom
       dependencies: [
         {
-          src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function () {
-          hljs.initHighlightingOnLoad();
-        }
+          src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true,
+          callback: function () {
+            hljs.initHighlighting()
+          }
         }
       ]
     })

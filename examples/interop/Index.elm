@@ -6,7 +6,6 @@ import Html.Shorthand exposing (..)
 import Bootstrap.Html exposing (..)
 import Maybe exposing (withDefault)
 
-
 type alias Model =
     { users : List User
     }

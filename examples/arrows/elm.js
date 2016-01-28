@@ -10380,11 +10380,11 @@ Elm.Html.Attributes.make = function (_elm) {
                                         ,property: property
                                         ,attribute: attribute};
 };
-Elm.Main = Elm.Main || {};
-Elm.Main.make = function (_elm) {
+Elm.Step5 = Elm.Step5 || {};
+Elm.Step5.make = function (_elm) {
    "use strict";
-   _elm.Main = _elm.Main || {};
-   if (_elm.Main.values) return _elm.Main.values;
+   _elm.Step5 = _elm.Step5 || {};
+   if (_elm.Step5.values) return _elm.Step5.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -10396,22 +10396,26 @@ Elm.Main.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var box = F2(function (x,y) {
-      return A2($Html.div,
-      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "50px"}
-                                              ,{ctor: "_Tuple2",_0: "height",_1: "50px"}
-                                              ,{ctor: "_Tuple2",_0: "position",_1: "absolute"}
-                                              ,{ctor: "_Tuple2",_0: "background",_1: "blue"}
-                                              ,{ctor: "_Tuple2",_0: "left",_1: A2($Basics._op["++"],$Basics.toString(x * 50),"px")}
-                                              ,{ctor: "_Tuple2",_0: "top",_1: A2($Basics._op["++"],$Basics.toString(y * 50),"px")}]))]),
-      _U.list([]));
-   });
-   var handleArrow = F2(function (a,b) {    return {x: a.x + b.x,y: $Basics.negate(a.y) + b.y};});
-   var model = A3($Signal.foldp,handleArrow,{x: 0,y: 0},$Keyboard.arrows);
-   var render = function (m) {
-      return A2($Html.div,_U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "position",_1: "relative"}]))]),_U.list([A2(box,m.x,m.y)]));
+   var asPx = function (n) {    return A2($Basics._op["++"],$Basics.toString(n),"px");};
+   var boxStyle = function (location) {
+      return _U.list([{ctor: "_Tuple2",_0: "position",_1: "absolute"}
+                     ,{ctor: "_Tuple2",_0: "background",_1: "blue"}
+                     ,{ctor: "_Tuple2",_0: "width",_1: "50px"}
+                     ,{ctor: "_Tuple2",_0: "height",_1: "50px"}
+                     ,{ctor: "_Tuple2",_0: "left",_1: asPx(location.x * 50)}
+                     ,{ctor: "_Tuple2",_0: "top",_1: asPx(location.y * 50)}]);
    };
+   var view = function (loc) {    return A2($Html.div,_U.list([$Html$Attributes.style(boxStyle(loc))]),_U.list([]));};
+   var handleArrow = F2(function (arrows,old) {    return {x: old.x + arrows.x,y: old.y + $Basics.negate(arrows.y)};});
+   var boxPosition = A3($Signal.foldp,handleArrow,{x: 0,y: 0},$Keyboard.arrows);
+   var main = A2($Signal.map,view,boxPosition);
    var Location = F2(function (a,b) {    return {x: a,y: b};});
-   var main = A2($Signal.map,render,model);
-   return _elm.Main.values = {_op: _op,main: main,Location: Location,render: render,model: model,handleArrow: handleArrow,box: box};
+   return _elm.Step5.values = {_op: _op
+                              ,Location: Location
+                              ,main: main
+                              ,boxPosition: boxPosition
+                              ,handleArrow: handleArrow
+                              ,view: view
+                              ,boxStyle: boxStyle
+                              ,asPx: asPx};
 };
